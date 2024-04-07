@@ -1,0 +1,12 @@
+{
+  "name": "module-5-hw",
+  "version": "1.0.0",
+  "description": "Global Mentoring Program - Module 5 - homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Zhibek Abdykalykova",
+  "license": "ISC"
+}
