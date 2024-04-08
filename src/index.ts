@@ -1,16 +1,14 @@
 import { createServer } from "http";
-import { Http2ServerRequest } from "http2";
 import { parse } from 'url';
 import { createUser } from "./controllers/createUser.js";
 import { deleteUser } from "./controllers/deleteUser.js";
+import { getHobbies } from "./controllers/getHobbies.js";
 import { getUserById } from "./controllers/getUserById.js";
 import { getUsers } from "./controllers/getUsers.js";
+import { updateUserHobbies } from "./controllers/updateHobbies.js";
 import { updateUser } from "./controllers/updateUser.js";
 
 const port = 8000;
-
-// Users will be stored here
-let users = [{ id: 1, name: 'User One' }];
 
 // Create HTTP server
 const server = createServer(async (req: any, res: any) => {
@@ -42,6 +40,12 @@ const server = createServer(async (req: any, res: any) => {
   } else if (req.method === 'DELETE' && pathArray[0] === 'users') {
     const id = pathArray[1];
     await deleteUser(req, res, id)
+  } else if (req.method === 'PATCH' && pathArray[2] === 'hobbies') {
+    const id = pathArray[1];
+    await updateUserHobbies(req, res, id);
+  } else if (req.method === 'GET' && pathArray[2] === 'hobbies') {
+    const id = pathArray[1];
+    await getHobbies(req, res, id);
   } else {
     // Unhandled route
     res.statusCode = 404;
@@ -51,5 +55,3 @@ const server = createServer(async (req: any, res: any) => {
 
 // Start the server
 server.listen(port, () => console.log(`Server running on port ${ port }`));
-
-// console.log('Hello world!');

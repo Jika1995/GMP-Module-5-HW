@@ -4,4 +4,7 @@ export type User = {
   email: string;
 };
 
-
+export type HobbyData = {
+  id: string;
+  hobbies: string[];
+}

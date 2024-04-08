@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "npx nodemon",
-    "dev": "ts-node-dev --exit-child src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "stop": "pkill -f 'node ./src/index.ts'"
   },
   "keywords": [],
   "author": "Zhibek Abdykalykova",
