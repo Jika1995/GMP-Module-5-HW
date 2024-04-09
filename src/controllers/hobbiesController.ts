@@ -1,6 +1,21 @@
-import { updateHobbies } from "../models/hobbiesModel.js";
+import { getUserHobbies, updateHobbies } from "../models/hobbiesModel.js";
 import { getOneById } from "../models/userModel.js";
 import { parseRequestBody } from "../utils/utils.js";
+
+export const getHobbies = async (req: any, res: any, id: string) => {
+  try {
+    const userHobbies: any = await getUserHobbies(id);
+
+    const hobbiesWithLinks = {
+      hobbies: userHobbies.hobbies,
+      links: { self: `api/users/${ id }/hobbies`, user: `api/users/${ id }` }
+    };
+    res.statusCode = 200;
+    res.end(JSON.stringify(hobbiesWithLinks));
+  } catch (err) {
+    console.log('getHobbiesErr', err);
+  };
+};
 
 export const updateUserHobbies = async (req: any, res: any, id: string) => {
   try {

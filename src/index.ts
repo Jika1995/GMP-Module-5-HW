@@ -1,12 +1,7 @@
 import { createServer } from "http";
 import { parse } from 'url';
-import { createUser } from "./controllers/createUser.js";
-import { deleteUser } from "./controllers/deleteUser.js";
-import { getHobbies } from "./controllers/getHobbies.js";
-import { getUserById } from "./controllers/getUserById.js";
-import { getUsers } from "./controllers/getUsers.js";
-import { updateUserHobbies } from "./controllers/updateHobbies.js";
-import { updateUser } from "./controllers/updateUser.js";
+import { createUser, deleteUser, getUsers, getUserById, updateUser } from "./controllers/userController.js";
+import { getHobbies, updateUserHobbies } from "./controllers/HobbiesController.js";
 
 const port = 8000;
 
@@ -21,7 +16,7 @@ const server = createServer(async (req: any, res: any) => {
   // Split the path
   const pathArray = trimmedPath?.split('/');
 
-  if (!pathArray) return console.log('No path');
+  if (!pathArray || pathArray.length === 0) return console.log('No path');
   // Set headers
   res.setHeader('Content-Type', 'application/json');
 

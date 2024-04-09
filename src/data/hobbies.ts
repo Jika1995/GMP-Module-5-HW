@@ -1,3 +1,3 @@
-import { HobbyData } from "../utils/types.js";
+import { HobbyData } from "../types.js";
 
 export const hobbies: HobbyData[] = [];

@@ -1,6 +1,6 @@
-import { v4 } from "uuid";
-import { User } from "../utils/types.js";
+import { User } from "../types.js";
 import { users } from "../data/users.js";
+import { randomUUID } from "crypto";
 
 export const getAll = () => {
   return new Promise((resolve, _reject) => {
@@ -21,7 +21,7 @@ export const getOneById = (id: string) => {
 
 export const create = (user: Omit<User, 'id'>) => {
   const newUser = {
-    id: v4(),
+    id: randomUUID(),
     ...user
   };
 
