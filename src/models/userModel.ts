@@ -31,25 +31,19 @@ export const create = (user: Omit<User, 'id'>) => {
   })
 }
 
-export const update = (user: User) => {
-  return new Promise((resolve, reject) => {
-    const userIdx = users.findIndex((u: User) => u.id === user.id);
-    if (!userIdx)
-      reject(new Error('User not found!'));
-
-    users[userIdx] = { ...user };
+export const update = (id: string, user: Omit<User, 'id'>) => {
+  return new Promise((resolve, _reject) => {
+    const userIdx = users.findIndex((u: User) => u.id === id);
+    console.log('found index', userIdx)
+    users[userIdx] = { id, ...user };
     resolve(users[userIdx]);
   });
 };
 
 export const remove = (id: string) => {
   return new Promise((resolve, reject) => {
-    const user = users.find((u: User) => u.id === id);
-
-    if (!user)
-      reject(new Error('User not found'));
-
-    const usersData = users.filter((u: User) => u.id !== id);
-    resolve(usersData);
+    const userIdx = users.findIndex((u: User) => u.id === id);
+    users.splice(userIdx, 1);
+    resolve(users);
   });
 };

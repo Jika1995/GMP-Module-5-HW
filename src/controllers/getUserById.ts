@@ -8,7 +8,7 @@ export const getUserById = async (req: any, res: any, id: string) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        links: [{ self: `api/users/${ user.id }`, hobbies: `api/users/${ user.id }/hobbies` }]
+        links: { self: `api/users/${ user.id }`, hobbies: `api/users/${ user.id }/hobbies` }
       };
       res.statusCode = 200;
       res.end(JSON.stringify(userData));

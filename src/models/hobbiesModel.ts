@@ -5,8 +5,13 @@ type updateHobbyData = {
 }
 export const getUserHobbies = (id: string) => {
   return new Promise((resolve, _reject) => {
-    const userHobbies = hobbies.find((item) => item.id === id)
-    resolve(userHobbies?.hobbies);
+    let userHobbies = hobbies.find((item) => item.id === id);
+    if (!userHobbies) {
+      hobbies.push({ id, hobbies: [] });
+      resolve({ id, hobbies: [] })
+      return;
+    };
+    resolve(userHobbies);
   });
 };
 

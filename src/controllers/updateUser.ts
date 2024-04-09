@@ -10,10 +10,10 @@ export const updateUser = async (req: any, res: any, id: string) => {
       res.end(JSON.stringify({ message: 'User not found' }));
     }
     const body: any = await parseRequestBody(req);
-
-    const updatedUser = await update(body);
+    const updatedUser: any = await update(id, body);
+    console.log('updatedUser', updatedUser);
     res.statusCode = 204;
-    res.end(JSON.stringify({ message: ` User ${ id } updated`, user: updatedUser }));
+    return res.end(JSON.stringify({ message: ` User ${ id } updated`, user: updatedUser }));
   } catch (err) {
     console.log('updateUserErr', err);
   }

@@ -25,11 +25,13 @@ const server = createServer(async (req: any, res: any) => {
   // Set headers
   res.setHeader('Content-Type', 'application/json');
 
-  if (req.method === 'GET' && pathArray[0] === 'users') {
+  if (req.method === 'GET' && pathArray[0] === 'users' && !pathArray[2]) {
     if (pathArray[1]) {
       const id = pathArray[1];
       await getUserById(req, res, id)
     } else {
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Cache-Control', 's-maxage=3600, public');
       await getUsers(req, res);
     }
   } else if (req.method === 'POST' && pathArray[0] === 'users') {
@@ -40,10 +42,12 @@ const server = createServer(async (req: any, res: any) => {
   } else if (req.method === 'DELETE' && pathArray[0] === 'users') {
     const id = pathArray[1];
     await deleteUser(req, res, id)
-  } else if (req.method === 'PATCH' && pathArray[2] === 'hobbies') {
+  } else if (req.method === 'PATCH' && pathArray[0] === 'users' && pathArray[2] === 'hobbies') {
     const id = pathArray[1];
     await updateUserHobbies(req, res, id);
-  } else if (req.method === 'GET' && pathArray[2] === 'hobbies') {
+  } else if (req.method === 'GET' && pathArray[0] === 'users' && pathArray[2] === 'hobbies') {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 's-maxage=3600, private');
     const id = pathArray[1];
     await getHobbies(req, res, id);
   } else {
